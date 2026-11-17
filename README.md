@@ -117,6 +117,14 @@
 
 拒收的几类，提前说清楚免得白写：需要关注公众号才能看全文的、纯导流的落地页、"XX 个技巧"但没有具体操作的、明显是 AI 批量生成的。
 
+## 清单之外
+
+体检表里有几项拿不准的，或者你看完不知道该走哪条路，可以直接问我。
+
+微信：cjdb2026
+
+想省事的，[get-claude-in-china](https://github.com/sobadgirl/get-claude-in-china) 是把环境整套搭好的服务。想自己动手，[use-claude-in-china](https://github.com/sobadgirl/use-claude-in-china) 里有每一步。
+
 ## License
 
 MIT。本仓库与 Anthropic, PBC 无官方关联。
