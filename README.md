@@ -1,134 +1,179 @@
-# Awesome Claude CN
-
-中文圈里关于 Claude 的可用资源，人工筛过一遍的。
-
-不做搬运站，不做导航页。这里的每一条我都点开看过，失效了会删。
-
-**收录标准**：现在还能打开、内容还成立、有具体信息量。纯引流页、要加群才给看的、标题党教程，不收。
+# Awesome Claude CN：中文实用资源与账号环境自检工具箱
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Last Update](https://img.shields.io/github/last-commit/sobadgirl/awesome-claude-cn)
 
-系列仓库｜[教程](https://github.com/sobadgirl/use-claude-in-china) · [避坑](https://github.com/sobadgirl/claude-fangfen) · [合集](https://github.com/sobadgirl/awesome-claude-cn) · [服务](https://github.com/sobadgirl/get-claude-in-china)
+系列导航｜**[实操教程](https://github.com/sobadgirl/use-claude-in-china)** · **[防封避坑](https://github.com/sobadgirl/claude-fangfen)** · **[资源与自检工具箱（当前）](https://github.com/sobadgirl/awesome-claude-cn)** · **[方案对比与省心部署](https://github.com/sobadgirl/get-claude-in-china)**
+
+这个仓库专门帮国内用 Claude 的朋友解决两件事：**第一，提供一套开号和充值前必跑的「网络与环境小测试」（包括纯净度查询站、DNS/WebRTC 防泄漏自测以及终端一键只读体检脚本），免得你在环境漏风的情况下白花冤枉钱；第二，把中文圈里真正有参考价值的官方入口、风控实测文章和主流使用方案汇总到一起。** 这里收录的链接都经过人工核验，不放失效死链和关注公众号才给看的套路文。
+
+> [!TIP]
+> **测完发现手头节点不过关？或者不想花时间折腾各种防泄漏参数，只想省心、无痛、稳定地用上满血 Claude？**
+>
+> 如果你不想自己到处找纯净住宅 IP、调分流规则和清旧电脑缓存，可以直接看我们的 **[一站式本机原生环境部署服务（附市面 6 种用法成本横评）](https://github.com/sobadgirl/get-claude-in-china)**：
+> - **1 对 1 远程整包配好**：美国独享静态住宅 IP + 专属国际企业域名邮箱（验证码自动转发）+ 本机深度清痕与防泄漏配置 + 电脑手机双端同步
+> - **真金白银兜底**：一次性部署费 **¥1,980**（独享住宅 IP **¥70/月**），**6 个月内发生官方封号全额退还部署费**
+> - **直接咨询微信**：**`cjdb2026`**（备注 `Claude`）
+
+---
 
 ## 目录
 
-- [官方](#官方)
-- [风控与账号安全](#风控与账号安全)
-- [支付](#支付)
-- [网络与 IP](#网络与-ip)
-- [Claude Code](#claude-code)
-- [中文实战记录](#中文实战记录)
-- [账号环境体检表](#账号环境体检表)
-- [待收录](#待收录)
+- [1. 开号前必跑：4 个免费在线环境小测试](#1-开号前必跑4-个免费在线环境小测试)
+- [2. 终端一键只读自检脚本（macOS / Linux）](#2-终端一键只读自检脚本macos--linux)
+- [3. 目前市面上使用 Claude 的 6 种主流方式速览](#3-目前市面上使用-claude-的-6-种主流方式速览)
+- [4. 官方核心入口与故障排查](#4-官方核心入口与故障排查)
+- [5. 风控实测、支付避坑与 Claude Code 精选资料](#5-风控实测支付避坑与-claude-code-精选资料)
+- [6. 正式注册与付款前 17 项核对清单](#6-正式注册与付款前-17-项核对清单)
+- [体检多项亮红灯？不想折腾可以直接交给我们](#体检多项亮红灯不想折腾可以直接交给我们)
 
-## 官方
+---
 
-先看官方说什么，其他都只是二手解读。
+## 1. 开号前必跑：4 个免费在线环境小测试
 
-- [Anthropic 消费者服务条款](https://www.anthropic.com/legal/consumer-terms)：账号共享、第三方接入、地区限制的原始依据都在这里
-- [Claude 帮助中心](https://support.claude.com/)：封号、验证、订阅问题的官方口径
-- [Claude 文档](https://docs.claude.com/)：Claude Code、API、模型能力
-- [Anthropic 状态页](https://status.anthropic.com/)：先确认是不是它自己挂了，再怀疑自己的环境
+很多朋友以为挂上代理能打开 Google 就万事大吉了，结果注册完三天内就被封。在正式注册或充值之前，强烈建议按顺序花三分钟跑一遍下面这 4 个免费小测试：
 
-有个习惯值得养成：遇到"账号不能用了"，先去状态页看一眼。服务故障和封号在页面上的表现经常一样。
+### 测试 ①：查 IP 的运营商属性（机房段还是真住宅宽带？）
+- **检测工具**：[IPinfo.io](https://ipinfo.io/) · [Ping0.cc（中文直观版）](https://ping0.cc/)
+- **怎么看结果**：
+  - 在 `IPinfo` 里重点看 `ASN` / `company` 字段：如果写着 `Amazon`、`DigitalOcean`、`Vultr`、`Choopa`、`Linode`、`Cloudflare` 等云厂商名字，说明这是商业数据中心机房段（`Hosting`），共享度高时很容易受邻居违规连坐；如果显示的是海外本土电信或有线宽带运营商（`ISP`），才是真正的住宅宽带属性。
+  - 在 `Ping0.cc` 里可以顺便看一眼「IP 类型（家庭宽带 / IDC 机房）」与「原生 IP / 广播 IP」标识，尽量避开风险值飘红的万人共享出口。
 
-## 风控与账号安全
+### 测试 ②：测 DNS 解析有没有偷偷漏回国内
+- **检测工具**：[IPLeak.net](https://ipleak.net/)
+- **怎么看结果**：打开页面等 10 秒钟，往下看 `DNS Address` 列表。如果表面 IP 显示在美国，但下面的 DNS 服务器列表里赫然躺着中国电信、联通、移动的国内省市 IP，说明你的代理分流存在严重的 **DNS 泄漏**，相当于一边穿着马甲一边把真实网络位置直接暴露给后端，必须先修好代理软件的远程 DNS 解析设置。
 
-- [Claude 防封号 & KYC 避坑完整指南（PANews）](https://www.panewslab.com/zh-hant/articles/019db34c-eb93-707b-9c25-dfe946dc11b1)。目前中文圈里最完整的一份，综合了多位被封过两位数账号的用户实测。环境、邮箱、IP、支付、KYC、申诉退款全流程都覆盖了。
-- [Claude 账号风控完整指南：地区、登录、KYC、封禁申诉（ClaudeMax）](https://claudemax.shop/blog/claude-account-risk-control-kyc-appeal)。把"风控"拆成六种状态，这个拆法很实用，因为 Warning、KYC、地区限制、支付失败、账号停用的处理路径完全不同。
-- [Claude Opus 在国内为什么越来越难用：KYC 验证与封号回顾（腾讯云社区）](https://cloud.tencent.com/developer/article/2708468)。三年封锁史的时间线整理，想搞清楚"为什么一年比一年难"看这篇。
-- [Claude Account Banned: 9 Reasons Why & How to Appeal Each（UnBanAI）](https://unbanai.org/fr/blog/anthropic-claude-ban-reasons-2026)。英文。九类触发原因对应九条申诉路径，API 账号部分比中文资料细。
+### 测试 ③：测浏览器 WebRTC 有没有暴露真实网络
+- **检测工具**：[BrowserLeaks WebRTC 测试](https://browserleaks.com/webrtc)
+- **怎么看结果**：检查 `Public IP Address` 一栏有没有跳出你本机的国内真实宽带公网地址。如果平时嫌调浏览器底层参数太麻烦，日常办公尽量直接用 **Claude 官方独立桌面客户端**，少用装满杂牌插件的日常浏览器裸登。
 
-## 支付
+### 测试 ④：核对浏览器时区与系统语言请求头
+- **检测工具**：[BrowserLeaks IP 与环境特征](https://browserleaks.com/ip)
+- **怎么看结果**：确认页面检测到的系统时区（Timezone）与你当前出口 IP 所在的美国城市时区完全一致，不要顶着美国 IP 却向网页暴露 `Asia/Shanghai`（东八区）时区。
 
-- [Anthropic 注册及支付的实验结论（Echosec）](https://blog.echosec.top/p/claude-signup-payment/)。少见的长期记录型文章，把每个阶段的报错原文都贴出来了。结论是大部分人能过注册，死在支付。
-- [Anthropic 再次大规模清退虚拟卡订阅 Claude Max（BlockBeats）](https://www.theblockbeats.info/flash/335788)。虚拟卡按 BIN 段批量清退的现场记录，解释了为什么"IP 干净也没用"。
-- [Claude 支付失败？没有海外银行卡的解决方案（TeamoRouter）](https://teamorouter.com/zh/blogs/claude-payment-failed-no-overseas-card)。服务商写的，结论有商业倾向，但各种支付方式的原理和坑说得清楚，当资料看，别当推荐看。
+---
 
-## 网络与 IP
+## 2. 终端一键只读自检脚本（macOS / Linux）
 
-这块中文资料最少，也最容易被卖 IP 的人带偏。有用的判断只有一条：查 ASN。
+针对经常用终端跑 **Claude Code** 的开发者，很多人的代理软件只管了浏览器，终端命令行其实一直在裸奔直连国内网络。
 
-- [IPinfo](https://ipinfo.io/)：输入 IP 看 ASN 和组织名。看到云厂商名字就是机房段，看到宽带运营商才是住宅。
-- [IP 纯净度自测的思路](https://github.com/sobadgirl/claude-fangfen)：为什么"同一个 IP 别人能用你不能"，写在避坑手册的中风险一节。
+我们在本仓库 [`scripts/env-check.sh`](scripts/env-check.sh) 里放了一份几十行代码、完全透明可读的 **纯只读本地自检小脚本**（不改任何系统设置，仅请求公开的 `ipinfo.io` 核对当前终端出口地区、机房关键字、本机时区一致性与历史残留目录）。
 
-## Claude Code
+克隆仓库或下载脚本后，可以直接在终端运行：
 
-- [Claude Code 官方文档](https://docs.claude.com/en/docs/claude-code)：安装、配置、权限模型、MCP
-- [Claude Code GitHub 仓库](https://github.com/anthropics/claude-code)：Issue 区是排错最快的地方，很多报错这里已经有人踩过
-
-## 中文实战记录
-
-真实时间线比结论有用。这一节收的是"我什么时候做了什么，然后发生了什么"。
-
-- [claude-fangfen 的 Issue 区](https://github.com/sobadgirl/claude-fangfen/issues)：欢迎把被封的时间线贴上来，越具体越好
-- 待收录。有好的复盘发 PR。
-
-## 账号环境体检表
-
-这份表是我自己用的，逐项过一遍，比看十篇教程有用。全部通过才建议开始注册或付费。
-
-### 身份与环境
-
-- [ ] 邮箱是自己注册的，不是买的
-- [ ] 邮箱开了两步验证
-- [ ] 手机号能长期收到短信，不是接码平台
-- [ ] 注册用的姓名、支付账单上的姓名、证件上的姓名，三者一致
-
-### 网络
-
-- [ ] 查过当前 IP 的 ASN，不是云厂商段
-- [ ] 这条线路接下来三个月不会换
-- [ ] 同一台机器上只走这一条线路，没有分流规则漏出去
-- [ ] DNS 没有泄漏，解析结果和出口 IP 在同一个国家
-- [ ] WebRTC 没有暴露真实内网地址
-
-### 一致性
-
-- [ ] 系统时区和 IP 所在地一致
-- [ ] 浏览器语言和时区匹配
-- [ ] 账单地址所在州和 IP 所在州一致
-- [ ] 同一个账号没有在多个设备上同时活跃
-
-### 支付
-
-- [ ] 支付方式不是虚拟卡 / U 卡
-- [ ] 这张卡没有被多个 Claude 账号用过
-- [ ] 这张卡没有在其他被封账号上出现过
-
-### 行为
-
-- [ ] 注册后不打算立刻跑批量任务
-- [ ] 头三天计划每天用几次，不是几百次
-- [ ] 没有把 OAuth 令牌接到第三方工具
-
-十七条里挂三条以上，先别付款。
-
-后面会补一份能一键跑的检测脚本（IP 段、DNS 泄漏、WebRTC、时区一致性）。写好了会放在这里。
-
-## 待收录
-
-想提 PR 的，按这个格式加一行：
-
-```
-- [标题](链接)。一句话说清这篇解决什么问题，以及它的局限。
+```bash
+git clone https://github.com/sobadgirl/awesome-claude-cn.git
+cd awesome-claude-cn
+bash scripts/env-check.sh
 ```
 
-拒收的几类，提前说清楚免得白写：需要关注公众号才能看全文的、纯导流的落地页、"XX 个技巧"但没有具体操作的、明显是 AI 批量生成的。
+也可以直接看清源码后单行执行：
 
-## 清单之外
+```bash
+curl -fsSL https://raw.githubusercontent.com/sobadgirl/awesome-claude-cn/main/scripts/env-check.sh | bash
+```
 
-体检表里有几项拿不准的，或者你看完不知道该走哪条路，可以直接问我。
+跑完如果提示终端出口在受限地区、命中云机房关键字或本机时区冲突，先别急着登录账号，按提示把虚拟网卡（TUN 模式）和系统时区对齐后再用。
 
-微信：cjdb2026
+---
 
-想省事的，[get-claude-in-china](https://github.com/sobadgirl/get-claude-in-china) 是把环境整套搭好的服务。想自己动手，[use-claude-in-china](https://github.com/sobadgirl/use-claude-in-china) 里有每一步。
+## 3. 目前市面上使用 Claude 的 6 种主流方式速览
+
+国内圈子里目前常见的用法主要有 6 种，我们在姊妹仓做了一份包含真实首年/次年开销算账的详细横评，这里放一张极简速查表供选型参考：
+
+| 方案路线 | 适合谁 | 一句话优缺点总结 |
+|---|---|---|
+| **拼车合租 / 国内镜像站** | 不介意随时掉线、无隐私要求的临时体验 | 最便宜，但多人异地并发极易整号封停，镜像站普遍掺水降智且毫无数据隐私 |
+| **第三方 API 中转站** | 只在脚本里低频调几次接口测试的开发者 | 免配网络，但重度写代码按量烧钱极贵、后台模型真假难辨，且用不了官方桌面客户端功能 |
+| **野生 DIY（普通机场 + 虚拟卡）** | 手头已有老号想碰运气的人 | 2026 年翻车重灾区，虚拟卡 BIN 段被批量清退，极易反复交学费 |
+| **租海外双 ISP 住宅 VPS** | 纯 Linux 命令行后端极客 | 防封稳，但月租不菲（¥280～¥550/月），且远端孤岛服务器无法直接读写你本机桌面的文档和项目 |
+| **远程租海外独享 Mac Mini** | 预算极充裕且能忍受远程延迟的人 | 每年光机器托管租金就要近万元，且跨太平洋 150～250ms 物理延迟导致桌面操作卡顿、资料存在别人硬盘上 |
+| **本机原生纯净环境部署** | **追求零延迟、直接操作本地文件、长期省钱省心的主力用户** | **直接装在自己电脑上，独享静态住宅 IP + 企业邮箱 + 本人 Apple ID 自充，首年比租服务器省一半、次年起每年省大几千** |
+
+👉 **完整算账与优缺点深度拆解见**：**[get-claude-in-china：国内 6 种主流方式深度横评](https://github.com/sobadgirl/get-claude-in-china#2-目前市面上使用-claude-的-6-种主流方式深度对比)**
+
+---
+
+## 4. 官方核心入口与故障排查
+
+遇到“突然打不开页面”或“一直报错”时，先别急着怀疑自己被封号，有时候纯粹是官方服务器自己宕机了，去状态页看一眼最准：
+
+- **[Anthropic 实时服务状态页（Status）](https://status.anthropic.com/)**：第一时间确认 Claude.ai、API 或 Claude Code 是不是正在发生全球性故障。
+- **[Claude 官方帮助中心](https://support.claude.com/)**：关于账号停用申诉、年龄核验、Persona 身份验证以及账单规则的官方一手说明。
+- **[Anthropic 官方消费者服务条款](https://www.anthropic.com/legal/consumer-terms)**：明确界定了禁止账号共享、禁止非官方第三方客户端接入等红线。
+- **[Claude 官方开发者与产品文档](https://docs.claude.com/)**：模型上下文窗口、提示词工程、桌面端与开发工具的权威文档。
+
+---
+
+## 5. 风控实测、支付避坑与 Claude Code 精选资料
+
+下面几篇是中文社区里少有的、基于真实踩坑记录写出来的干货，没有水分：
+
+### 风控演进与支付实测
+- **[Claude 防封号与 KYC 避坑完整指南（PANews）](https://www.panewslab.com/zh-hant/articles/019db34c-eb93-707b-9c25-dfe946dc11b1)**：综合了多位被封过十几个账号的重度用户实测，把邮箱、IP、支付、KYC 到退款止损串得很完整。
+- **[Claude Opus 在国内为什么越来越难用：KYC 验证与封号回顾（腾讯云开发者社区）](https://cloud.tencent.com/developer/article/2708468)**：把近两年封锁升级的时间线梳理得很清楚，看完就能明白为什么以前的土办法现在不管用了。
+- **[Anthropic 注册及支付的实验结论（Echosec）](https://blog.echosec.top/p/claude-signup-payment/)**：长期跟踪记录型文章，贴出了各个阶段真实的支付报错原文，印证了“大部分人能过注册，真正死在绑卡付款这一关”。
+
+### Claude Code 与本地协同生态
+- **[Claude Code 官方 GitHub 仓库（anthropics/claude-code）](https://github.com/anthropics/claude-code)**：终端编程神器的官方大本营，遇到命令行报错直接搜它的 Issues 区是排错最快的地方。
+- **[本系列实操教程仓（use-claude-in-china）](https://github.com/sobadgirl/use-claude-in-china)**：包含零信用卡注册美区 Apple ID、免税州地址填写、支付宝买礼品卡内购以及本机运行 Claude Code 的完整步骤。
+- **[本系列防封避坑仓（claude-fangfen）](https://github.com/sobadgirl/claude-fangfen)**：专门拆解四维联合校验、新号 72 小时观察期以及旧电脑连坐机制，它的 [Issues 区](https://github.com/sobadgirl/claude-fangfen/issues) 也开放收集真实封号复盘案例。
+
+---
+
+## 6. 正式注册与付款前 17 项核对清单
+
+准备自己动手开号和充值前，建议拿这张表逐条过一遍：
+
+### 身份与旧机清理
+- [ ] 如果这台电脑以前封过号，已经彻底删干净了旧客户端本地残留目录与旧浏览器缓存
+- [ ] 注册邮箱是自己亲手注册的干净海外邮箱（或独立企业域名邮箱），绝非买来的二手批量号
+- [ ] 邮箱已开启两步验证（2FA），密码已妥善保存
+- [ ] 收验证码时只手动输入 6 位数字码，不在未开代理的微信或默认浏览器里误点邮件跳转链接
+
+### 网络与环境一致性
+- [ ] 已在 `ipinfo.io` / `ping0.cc` 查过当前出口，不属于高危万人共享机房段
+- [ ] 已经选定一个固定的美国城市节点，接下来长期锁定不随便切国家
+- [ ] 已在 `ipleak.net` 测过无国内运营商 DNS 泄漏
+- [ ] 已在 `browserleaks.com/webrtc` 测过无真实公网 IP 暴露
+- [ ] 电脑和手机的系统时区已手动锁死在出口 IP 所在城市（Mac 已关定位服务里的自动设时区）
+- [ ] 终端跑 `scripts/env-check.sh` 显示出口与时区均正常通过
+- [ ] 同一个新账号只固定在本人主力电脑与手机上使用，不在多台陌生电脑间来回切
+
+### 支付与使用习惯
+- [ ] 绝不使用免实名的加密货币虚拟信用卡（U 卡）直接绑网页付款
+- [ ] 绝不找来路不明的低价黑卡代充或买共享成品号
+- [ ] 美区 Apple ID 为本人独享注册，且账单地址已填在俄勒冈等免税州
+- [ ] 首月先开 `20` 美元的 Pro 档稳住记录，不第一天直接拉满最高档
+- [ ] 新号前 72 小时保持自然人工对话节奏，不挂高频自动化脚本狂刷
+- [ ] 绝不把官方账号的 OAuth 授权令牌提取接入非官方第三方中转工具
+
+---
+
+## 体检多项亮红灯？不想折腾可以直接交给我们
+
+如果你跑完上面的在线测试和脚本，发现手头节点全是机房段、DNS 漏成筛子，或者你根本不想为了用个 AI 工具去补习这么多网络与防关联知识，可以直接找我们一步到位把环境搭好。
+
+详细说明与费用对比见 👉 **[get-claude-in-china](https://github.com/sobadgirl/get-claude-in-china)**
+
+> **1 对 1 本机原生环境整包部署（把满血 Claude 直接装进你自己的电脑和手机）：**
+> - **省心四件套一次交付**：美国本土独享静态住宅 IP + 专属国际企业域名邮箱（验证码自动秒转）+ 本机旧痕迹深度清理与防泄漏联调 + 电脑手机双端同步
+> - **透明定价无套路**：一次性环境部署费 **¥1,980** + 独享静态住宅 IP **¥70 / 月**（Claude 会员走你本人美区 Apple ID 官方原价自主订阅）
+> - **6 个月封号全额退费**：自部署验收起 **6 个月内**，按日常规范使用若发生官方封号，**¥1,980 部署费一分不少全额退还**
+>
+> **咨询与预约微信**：**`cjdb2026`**（备注 `Claude`）
+
+---
+
+## 欢迎提交优质资源（PR）
+
+如果你读到过实测靠谱、没有套路的中文深度复盘或实用工具，欢迎发 Pull Request 补充进来，格式如下：
+
+```markdown
+- **[文章或工具名称](链接)**：一句话说明它具体帮大家解决什么问题。
+```
 
 ## License
 
-MIT。本仓库与 Anthropic, PBC 无官方关联。
-
-## Changelog
-
-2026-11-17 · v1.0 首版：官方、风控、支付、网络、Claude Code、实战记录、环境体检表
+MIT License。本仓库与 Anthropic, PBC 无任何官方关联。
